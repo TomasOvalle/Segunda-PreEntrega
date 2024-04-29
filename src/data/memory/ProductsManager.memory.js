@@ -62,7 +62,7 @@ class ProductsManager {
     }
 }
 
-const products = new ProductsManager(); 
+/*const products = new ProductsManager(); 
 
 products.create({
     title: "Producto 1",
@@ -94,4 +94,4 @@ console.log(products.read());
 console.log(products.readOne(2));
 console.log(products.readOne(12));
 console.log(products.destroy(3));
-console.log(products.destroy(15));
+console.log(products.destroy(15)); */

@@ -61,7 +61,7 @@ class UserManager {
     }
 }
 
-const usuarios = new UserManager
+/*const usuarios = new UserManager
 
 usuarios.create({
     photo: "photo1.jpg",
@@ -94,4 +94,4 @@ console.log(usuarios.read());
 console.log(usuarios.readOne(2));
 console.log(usuarios.readOne(6));
 console.log(usuarios.destroy(4));
-console.log(usuarios.destroy(9));
+console.log(usuarios.destroy(9)); */

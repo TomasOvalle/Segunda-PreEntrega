@@ -1,4 +1,4 @@
-import usersManager from "../data/fs/UsersManager.fs.js"
+/*import usersManager from "../data/fs/UsersManager.fs.js"
 
 
 export default async (socket) => {
@@ -8,4 +8,4 @@ export default async (socket) => {
         await usersManager.create(data);
         socket.emit("users", await usersManager.read());
     });
-};
+};*/

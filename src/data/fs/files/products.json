@@ -403,5 +403,14 @@
     "category": "manga",
     "price": "25490",
     "stock": 1
+  },
+  {
+    "id": "bcc7ecea0119e7ef7d125f31",
+    "title": "frieren",
+    "publisher": "publisher",
+    "photo": "https://i.postimg.cc/wTgNFWhR/profile.png",
+    "category": "manga",
+    "price": 1,
+    "stock": 1
   }
 ]

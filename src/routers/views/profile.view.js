@@ -7,7 +7,7 @@ usersRouter.get("/:uid", async (req, res, next) => {
     try {
         const { uid } = req.params;
         const profile = await usersManager.readOne(uid);
-        return res.render("profile", { title: "REAL", profile });
+        return res.render("profile", { title: "Profile", profile });
     } catch (error) {
         return next(error)
     }
