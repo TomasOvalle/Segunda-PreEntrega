@@ -1,9 +1,9 @@
 import { Router } from "express";
 import usersManager from "../../data/fs/UsersManager.fs.js"
 
-const usersRouter = Router();
+const profileRouter = Router();
 
-usersRouter.get("/:uid", async (req, res, next) => {
+profileRouter.get("/:uid", async (req, res, next) => {
     try {
         const { uid } = req.params;
         const profile = await usersManager.readOne(uid);
@@ -13,4 +13,4 @@ usersRouter.get("/:uid", async (req, res, next) => {
     }
 })
 
-export default usersRouter;
+export default profileRouter;

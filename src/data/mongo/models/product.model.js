@@ -1,8 +1,9 @@
 import { Schema, Types, model } from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2"
 
 const collection = "products";
 const schema = new Schema ( {
-    product_id: { type: Types.ObjectId, ref:"products", required: true, index: true},
+    product_id: { type: Types.ObjectId, ref: "products", required: true, index: true},
     title: { type: String, required: true, index: true},
     photo: { type: String, default: "https://i.postimg.cc/wTgNFWhR/profile.png"},
     category: { type: String, default: "manga"},
@@ -11,7 +12,10 @@ const schema = new Schema ( {
 }, 
 {
     timestamps: true,
-});
+}
+);
+
+schema.plugin(mongoosePaginate);
 
 schema.pre("find", function() { this.populate("product_id", "title")});
 schema.pre("findOne", function() { this.populate("product_id")});

@@ -1,8 +1,8 @@
-import { Schema, Types, model } from "mongoose";
+import { Schema, model } from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const collection = "users";
 const schema = new Schema ( {
-    user_id: { type: Types.ObjectId, ref: "users", required: true, index: true},
     email: { type: String, required: true, unique: true, index: true},
     password: { type: String, required: true },
     role: { type: Number, default: 0,},
@@ -17,8 +17,7 @@ const schema = new Schema ( {
 }
 );
 
-schema.pre("find", function () { this.populate("user_id", "email, photo -_id" )});
-schema.pre("findOne", function () { this.populate("user_id", "email")});
+schema.plugin(mongoosePaginate)
 
 const User = model(collection, schema);
 export default User;

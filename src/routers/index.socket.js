@@ -1,6 +1,9 @@
-import usersManager from "../data/fs/UsersManager.fs.js"
-import productsManager from "../data/fs/ProductsManager.fs.js";
+//import usersManager from "../data/fs/UsersManager.fs.js"
+//import productsManager from "../data/fs/ProductsManager.fs.js";
+import usersManager from "../data/mongo/manager/UsersManager.mongo.js";
+import productsManager from "../data/mongo/manager/ProductsManager.mongo.js";
 import { socketServer } from "../../server.js"
+import cartsManager from "../data/mongo/manager/CartsManager.mongo.js";
 
 let messages = []
 
@@ -24,4 +27,5 @@ export default async socket => {
         messages = allMessages
         socketServer.emit("messages", messages)
     })
+    socket.emit("cart", await cartsManager.read())
 }

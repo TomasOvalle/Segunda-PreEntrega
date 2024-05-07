@@ -1,10 +1,12 @@
 import { Router } from "express";
-import usersManager from "../../data/fs/UsersManager.fs.js";
+//import usersManager from "../../data/fs/UsersManager.fs.js";
+import usersManager from "../../data/mongo/manager/UsersManager.mongo.js"
 
 
 const usersRouter = Router();
 
 usersRouter.get("/", read);
+usersRouter.get("/paginate", paginate);
 usersRouter.get("/:uid", readOne);
 usersRouter.post("/", create );
 usersRouter.put("/:uid", update);
@@ -66,6 +68,37 @@ async function read( req, res, next) {
         }
     } catch (error) {
         return next(error);
+    }
+}
+
+async function paginate(req, res , next) {
+    try {
+        const filter = {};
+        const opts = {};
+        if (req.query.limit) {
+            opts.limit = req.query.limit
+        }
+        if (req.query.page) {
+            opts.page = req.query.page
+        }
+        if (req.query.role) {
+            filter.role = req.query.role
+        }
+        const all = await usersManager.paginate( filter, opts )
+        return res.json({
+            statusCode: 200,
+            response: all.docs,
+            info: {
+                totalDocs: all.totalDocs,
+                page: all.page,
+                totalPages: all.totalPages,
+                limit: all.limit,
+                prevPage: all.prevPage,
+                nextPage: all.nextPage,
+            }
+        })
+    } catch (error) {
+        return next(error)
     }
 }
 

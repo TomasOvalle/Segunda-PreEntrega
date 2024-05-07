@@ -1,15 +1,16 @@
 import { Router } from "express";
 import productsRouter from "./products.view.js";
-import usersRouter from "./profile.view.js";
-import productsDetailRouter from "./details.view.js";
-import registerRouter from "./register.view.js";
+import profileRouter from "./profile.view.js";
+import usersRouter from "./users.view.js";
+import cartsRouter from "./cart.view.js";
 
 const viewsRouter = Router();
 
 viewsRouter.use("/products", productsRouter);
-viewsRouter.use("/products", productsDetailRouter);
+viewsRouter.use("/", profileRouter);
 viewsRouter.use("/users", usersRouter);
-viewsRouter.use("/register", registerRouter);
+viewsRouter.use("/cart", cartsRouter);
+
 viewsRouter.get("/", (req, res , next) => {
     try {
         return res.render("index", { title: "HOME" });
