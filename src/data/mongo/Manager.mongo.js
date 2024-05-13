@@ -12,6 +12,20 @@ class Manager {
         }
     }
 
+/*    async read({ filter, options }) {
+        try {
+            options = { ...options, lean: true };
+            const all = await this.Model.paginate(filter, options);
+            if (all.totalDocs === 0) {
+                const error = new Error("There aren't any document");
+                error.statusCode = 404;
+                throw error;
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
+*/
     async read(filter) {
         try {
             if (filter && filter.user_id) {
@@ -35,9 +49,19 @@ class Manager {
         }
     }
 
-    async readOne(id) {
+    async readOne(_id) {
         try {
-            const one = await this.Model.findOne({ _id: id });
+            const one = await this.Model.findOne({ _id });
+            console.log(one);
+            return one;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async readByEmail(email) {
+        try {
+            const one = await this.Model.findOne({ email });
             return one
         } catch (error) {
             throw error
@@ -52,7 +76,25 @@ class Manager {
             throw error
         }
     }
+//Nuevo
+    async updatePartial(id, data) {
+        try {
+            const one = await this.Model.findByIdAndUpdate(id, { $set: data }, { new: true });
+            return one;
+        } catch (error) {
+            throw error;
+        }
+    }
 
+    async finalizePurchase(cid) {
+        try {
+            const cart = await this.Model.findByIdAndDelete(cid);
+            return cart;
+        } catch (error) {
+            throw error;
+        }
+    }
+//
     async destroy (id) {
         try {
             const one = await this.Model.findByIdAndDelete(id);

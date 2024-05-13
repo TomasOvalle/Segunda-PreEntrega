@@ -17,8 +17,8 @@ const schema = new Schema ( {
 
 schema.plugin(mongoosePaginate);
 
-schema.pre("find", function() { this.populate("product_id", "title")});
-schema.pre("findOne", function() { this.populate("product_id")});
+//schema.pre("find", function() { this.populate("product_id", "title")});
+//schema.pre("findOne", function() { this.populate("product_id")});
 
 const Product = model(collection, schema);
 export default Product;

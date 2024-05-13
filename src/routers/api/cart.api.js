@@ -155,5 +155,44 @@ cartsRouter.get("/api/carts", async (req, res, next) => {
         return next(error)
     }
 })
+//Nuevo
+cartsRouter.delete("/:cid", async (req, res, next) => {
+    try {
+        const { cid } = req.params;
+        const one = await cartsManager.destroy(cid);
+        return res.json({
+            statusCode: 200, 
+            response: one,
+        })
+    } catch (error) {
+        return next (error)
+    }
+})
+
+cartsRouter.post("/api/carts/:cid", async (req, res, next) => {
+    try {
+        const { cid } = req.params;
+        const one = await cartsManager.finalizePurchase(cid);
+        return res.json({
+            statusCode: 200,
+            response: one,
+        })
+    } catch (error) {
+        return next (error)
+    }
+})
+
+cartsRouter.patch("/:cid" , async (req, res , next) => {
+    try {
+        const { cid } = req.params;
+        const one = await cartsManager.updatePartial(cid);
+        return res.json({
+            statusCode: 200,
+            response: one,
+        })
+    } catch (error) {
+        return next (error)
+    }
+})
 
 export default cartsRouter;

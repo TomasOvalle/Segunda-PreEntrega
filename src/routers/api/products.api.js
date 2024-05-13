@@ -1,13 +1,14 @@
 import { Router } from "express";
 //import productsManager from "../../data/fs/ProductsManager.fs.js";
 import productsManager from "../../data/mongo/manager/ProductsManager.mongo.js"
+import isValidAdmin from "../../middlewares/isValidAdmin.mid.js";
 
 const productsRouter = Router();
 
 productsRouter.get("/", read);
 productsRouter.get("/paginate", paginate);
 productsRouter.get("/:pid", readOne);
-productsRouter.post("/", create );
+productsRouter.post("/", isValidAdmin, create );
 productsRouter.put("/:pid", update);
 productsRouter.delete("/:pid", destroy);
 
@@ -142,7 +143,7 @@ productsRouter.get("/api/products", async (req, res, next) => {
 productsRouter.get("/api/products/:pid", async (req, res, next) => {
     try {
         const { pid } = req.params;
-        const one = await productsRouter.readOne(pid);
+        const one = await productsManager.readOne(pid);
         if (one) {
             return res.json({
                 statusCode: 200,
